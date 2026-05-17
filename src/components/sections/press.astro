@@ -1,0 +1,50 @@
+---
+const publications = [
+  { name: "The Real Deal", abbr: "TRD", color: "#e63946", articles: "6+ articles" },
+  { name: "Wall Street Journal", abbr: "WSJ", color: "#0080c6", articles: "Featured" },
+  { name: "Forbes", abbr: "Forbes", color: "#f0c519", articles: "Top list" },
+  { name: "Inc.", abbr: "Inc.", color: "#e63946", articles: "16 Habits" },
+  { name: "New York Times", abbr: "NYT", color: "#f0f2f8", articles: "Featured" },
+  { name: "Bloomberg", abbr: "BLM", color: "#f0c519", articles: "Pipeline" },
+];
+---
+
+<section id="press" class="border-t border-white/6 py-20">
+  <div class="max-w-7xl mx-auto px-6">
+    <p class="text-xs text-white/25 uppercase tracking-widest text-center mb-10">
+      As seen in
+    </p>
+
+    <div class="grid grid-cols-3 md:grid-cols-6 gap-4">
+      {publications.map((pub) => (
+        <div class="glass rounded-xl px-4 py-5 flex flex-col items-center gap-2 group hover:border-white/12 transition-all">
+          <!-- Logo abbr (placeholder until real logos) -->
+          <div class="text-lg font-bold tracking-tight" style={`color: ${pub.color}`}>
+            {pub.abbr}
+          </div>
+          <div class="text-xs text-white/20 text-center leading-tight">{pub.articles}</div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Quote from Jay -->
+    <div class="mt-16 max-w-2xl mx-auto text-center">
+      <blockquote class="text-xl text-white/50 font-serif font-normal leading-relaxed italic">
+        "South Florida waterfront real estate is one of the last places on earth
+        where supply is permanently constrained. The developer who finds the right
+        parcel first — and moves fastest — wins."
+      </blockquote>
+      <div class="flex items-center justify-center gap-3 mt-6">
+        <img
+          src="https://picsum.photos/seed/jayroberts/48/48"
+          alt="Jay Roberts"
+          class="w-10 h-10 rounded-full object-cover ring-1 ring-white/10"
+        />
+        <div class="text-left">
+          <p class="text-sm text-white font-medium">Jay Roberts</p>
+          <p class="text-xs text-white/30">CEO & Founder, Prosper Group</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
