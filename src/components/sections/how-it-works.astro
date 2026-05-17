@@ -1,0 +1,75 @@
+---
+const steps = [
+  {
+    number: "01",
+    title: "Ingest public data",
+    description:
+      "DealScout pulls from Miami-Dade and Hillsborough Property Appraiser APIs daily — owner names, land values, zoning codes, lot sizes, sale history — and normalizes everything into a single PostGIS database.",
+    tags: ["Miami-Dade PA", "Hillsborough PA", "Census API", "FDOT Traffic"],
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-6 h-6"><path d="M4 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7Z"/><path d="M4 15a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-1Z"/></svg>`,
+  },
+  {
+    number: "02",
+    title: "Score every parcel",
+    description:
+      "Each parcel receives a 0–100 deal score based on 7 weighted criteria that reflect Prosper Group's exact acquisition playbook — waterfront proximity, zoning class, price range fit, lot size, population growth, traffic, and negotiability.",
+    tags: ["7 criteria", "Weighted 0–100", "Tier A/B/C", "PostGIS"],
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-6 h-6"><path d="M9 3H5a2 2 0 0 0-2 2v4"/><path d="M9 3h6"/><path d="M15 3h4a2 2 0 0 1 2 2v4"/><path d="M3 9v6"/><path d="M21 9v6"/><path d="M3 15v4a2 2 0 0 0 2 2h4"/><path d="M15 21h4a2 2 0 0 0 2-2v-4"/><path d="m9 12 2 2 4-4"/></svg>`,
+  },
+  {
+    number: "03",
+    title: "Surface ranked deals",
+    description:
+      "The dashboard shows Tier A parcels at the top — on a Mapbox map and as a ranked list. Jay and Raffaele get email alerts the moment a new high-score parcel appears. One click adds a deal to the watchlist.",
+    tags: ["Ranked list", "Mapbox GL", "Email alerts", "Watchlist"],
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-6 h-6"><path d="M3 3h18v4H3z"/><path d="M3 11h18"/><path d="M3 19h12"/><path d="M19 16l2 2 4-4" class="hidden"/><circle cx="18" cy="18" r="3"/><path d="m20 20 2 2"/></svg>`,
+  },
+];
+---
+
+<section id="how-it-works" class="max-w-7xl mx-auto px-6 py-28">
+  <!-- Header -->
+  <div class="text-center mb-20">
+    <div class="inline-flex items-center gap-2 rounded-full bg-white/5 border border-white/8 px-3 py-1.5 text-xs text-white/50 mb-6 tracking-wide uppercase">
+      How it works
+    </div>
+    <h2 class="text-4xl sm:text-5xl font-serif font-normal text-white leading-tight mb-4">
+      From raw data to ranked deals
+      <br />
+      <span class="text-white/40">in three steps</span>
+    </h2>
+    <p class="text-white/40 max-w-xl mx-auto">
+      Fully automated. Runs every night. Ready in your dashboard by morning.
+    </p>
+  </div>
+
+  <!-- Steps -->
+  <div class="relative">
+    <!-- Connecting line (desktop) -->
+    <div class="hidden lg:block absolute top-12 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      {steps.map((step) => (
+        <div class="group relative glass rounded-2xl p-8 hover:border-white/12 transition-all duration-300 hover:-translate-y-1">
+          <!-- Step number + icon -->
+          <div class="flex items-start justify-between mb-6">
+            <span class="text-5xl font-bold text-white/6 tabular-nums leading-none">{step.number}</span>
+            <div class="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400" set:html={step.icon} />
+          </div>
+
+          <h3 class="text-white font-medium text-lg mb-3">{step.title}</h3>
+          <p class="text-white/40 text-sm leading-relaxed mb-6">{step.description}</p>
+
+          <!-- Tags -->
+          <div class="flex flex-wrap gap-2">
+            {step.tags.map((tag) => (
+              <span class="text-xs text-white/30 border border-white/8 rounded-full px-2.5 py-1">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
