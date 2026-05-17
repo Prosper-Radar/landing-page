@@ -1,17 +1,493 @@
 ---
-
+import "../styles/global.css";
+import HoverFooter from "../components/ui/hover-footer";
+import Globe from "../components/ui/Globe";
 ---
 
+<!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DealScout — South Florida Land Intelligence</title>
+    <meta name="description" content="Automated parcel scoring across Miami-Dade and Hillsborough. 7 criteria. Ranked daily. For Prosper Group only." />
+    <link rel="icon" href="/favicon.ico" />
+  </head>
+
+  <body>
+
+    <!-- ══════════════════════════════════
+         NAV
+    ══════════════════════════════════ -->
+    <header class="sticky top-0 z-50 w-full border-b border-white/6 bg-[#0a0a0b]/80 backdrop-blur-xl">
+      <div class="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-8">
+
+        <a href="/" class="flex items-center gap-2.5 shrink-0">
+          <img src="/noun.png" alt="DealScout" class="h-7 w-auto" />
+          <span class="text-sm font-semibold text-white tracking-tight">DealScout</span>
+        </a>
+
+        <nav class="hidden md:flex items-center gap-1">
+          {["How it works", "Scoring", "Markets", "Pricing"].map((l) => (
+            <a href={`#${l.toLowerCase().replace(/ /g, "-")}`}
+               class="px-3 py-1.5 text-sm text-white/50 hover:text-white hover:bg-white/5 rounded-lg transition-colors">
+              {l}
+            </a>
+          ))}
+        </nav>
+
+        <div class="flex items-center gap-2">
+          <a href="#access" class="hidden sm:block px-3 py-1.5 text-sm text-white/50 hover:text-white transition-colors">
+            Sign in
+          </a>
+          <a href="#access" class="px-3 py-1.5 text-sm font-medium bg-white text-[#0a0a0b] hover:bg-white/90 rounded-lg transition-colors">
+            Get access
+          </a>
+        </div>
+      </div>
+    </header>
+
+
+    <!-- ══════════════════════════════════
+         HERO — 100vh, flex col, globe en footer 25vh
+    ══════════════════════════════════ -->
+    <section class="hero-section">
+
+      <!-- Stars -->
+      <div class="stars" aria-hidden="true"></div>
+
+      <!-- Glow derrière le globe -->
+      <div class="globe-glow" aria-hidden="true"></div>
+
+      <!-- Zone texte — flex:1, centré verticalement -->
+      <div class="hero-content">
+
+        <div class="animate-fade-up-1 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/4 px-3 py-1.5 text-xs text-white/50 mb-8">
+          <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
+          Live · 247 parcels scored across South Florida
+        </div>
+
+        <h1 class="animate-fade-up-2 text-[clamp(2.6rem,6.5vw,5rem)] font-bold leading-[1.04] tracking-[-0.03em] text-white mb-5">
+          The next deal,<br />
+          <span class="text-white/30">before anyone else.</span>
+        </h1>
+
+        <p class="animate-fade-up-3 text-[15px] sm:text-base text-white/40 max-w-xl mx-auto mb-10 leading-relaxed">
+          Automated land scoring across Miami-Dade and Hillsborough.
+          Seven criteria. Ranked every morning. Private.
+        </p>
+
+        <div class="animate-fade-up-4 flex items-center justify-center gap-3 flex-wrap">
+          <a href="#access"
+             class="inline-flex items-center gap-2 rounded-lg bg-white px-5 py-2.5 text-sm font-semibold text-[#0a0a0b] hover:bg-white/90 transition-colors">
+            Request access
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+          <a href="#how-it-works"
+             class="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/4 px-5 py-2.5 text-sm text-white/60 hover:text-white hover:bg-white/8 transition-colors">
+            See how it works
+          </a>
+        </div>
+      </div>
+
+      <!-- Globe absolu au fond du hero -->
+      <div class="globe-zone">
+        <Globe client:load />
+        <div class="globe-fade" aria-hidden="true"></div>
+      </div>
+
+    </section>
+
+
+    <!-- ══════════════════════════════════
+         PRESS STRIP
+    ══════════════════════════════════ -->
+    <div class="relative border-y border-white/6 bg-[#0a0a0b]">
+      <div class="mx-auto max-w-7xl px-4 sm:px-8 py-5">
+        <div class="flex flex-wrap items-center justify-between gap-6">
+          <p class="text-[10px] font-medium uppercase tracking-widest text-white/20 shrink-0">As seen in</p>
+          <div class="flex flex-wrap items-center gap-8">
+            {["The Real Deal", "Wall Street Journal", "Forbes", "Inc.", "Bloomberg", "GlobeSt"].map((p) => (
+              <span class="text-xs font-semibold text-white/20 hover:text-white/40 transition-colors cursor-default tracking-wide">{p}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ══════════════════════════════════
+         HOW IT WORKS — 3-col cards
+    ══════════════════════════════════ -->
+    <section id="how-it-works" class="relative z-20 bg-[#0a0a0b] py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-8">
+
+        <div class="mb-16 max-w-lg">
+          <p class="text-[10px] font-medium uppercase tracking-widest text-blue-400 mb-3">How it works</p>
+          <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white leading-[1.1]">
+            Raw county data to<br />ranked deal list.
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {[
+            {
+              num: "01",
+              title: "Ingest",
+              body: "Miami-Dade and Hillsborough PA APIs pulled daily. Owner names, land values, zoning, sale history — all normalized into one PostGIS database.",
+              icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-5 h-5"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.657 4.03 3 9 3s9-1.343 9-3V5"/><path d="M3 12c0 1.657 4.03 3 9 3s9-1.343 9-3"/></svg>`,
+              tags: ["Miami-Dade PA", "Hillsborough PA", "PostGIS"],
+            },
+            {
+              num: "02",
+              title: "Score",
+              body: "Seven-criteria weighted algorithm encodes Prosper Group's exact playbook. Every parcel gets a 0–100 score and a tier — recomputed nightly.",
+              icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-5 h-5"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>`,
+              tags: ["7 criteria", "Tier A / B / C", "Nightly"],
+            },
+            {
+              num: "03",
+              title: "Surface",
+              body: "Ranked list and Mapbox map in a private dashboard. Email the moment a new Tier A appears. One click to add to watchlist.",
+              icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-5 h-5"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`,
+              tags: ["Mapbox GL", "Email alerts", "Watchlist"],
+            },
+          ].map((card) => (
+            <div class="group rounded-[12px] border border-white/6 bg-[#111113] p-6 hover:border-white/12 hover:bg-[#141416] transition-all duration-300">
+              <div class="mb-5 flex items-start justify-between">
+                <span class="text-4xl font-bold text-white/6 tabular-nums leading-none">{card.num}</span>
+                <div class="flex h-9 w-9 items-center justify-center rounded-lg border border-white/8 bg-white/4 text-white/50" set:html={card.icon} />
+              </div>
+              <h3 class="text-base font-semibold text-white mb-2">{card.title}</h3>
+              <p class="text-sm text-white/40 leading-relaxed mb-5">{card.body}</p>
+              <div class="flex flex-wrap gap-1.5">
+                {card.tags.map((t) => (
+                  <span class="rounded-full border border-white/8 px-2.5 py-0.5 text-xs text-white/30">{t}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════
+         SCORING — 2-col
+    ══════════════════════════════════ -->
+    <section id="scoring" class="relative z-20 bg-[#0f0f10] py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-8">
+        <div class="rounded-[16px] border border-white/6 bg-[#111113] overflow-hidden grid grid-cols-1 md:grid-cols-2">
+
+          <!-- Left: text + weight bars -->
+          <div class="p-10 lg:p-14 flex flex-col justify-center">
+            <p class="text-[10px] font-medium uppercase tracking-widest text-blue-400 mb-3">Scoring engine</p>
+            <h2 class="text-3xl font-bold tracking-tight text-white leading-[1.1] mb-4">
+              Prosper Group's playbook,<br />in code.
+            </h2>
+            <p class="text-sm text-white/40 leading-relaxed mb-8">
+              Waterfront exposure, zoning upside, price fit, lot size, demographics, traffic —
+              each criterion is a weighted formula. One score. Automatic. Every night.
+            </p>
+            <div class="space-y-2.5">
+              {[
+                { label: "Waterfront proximity", w: "30%", width: "90%",  color: "bg-blue-500" },
+                { label: "Zoning class",         w: "20%", width: "60%",  color: "bg-violet-500" },
+                { label: "Price range fit",       w: "15%", width: "45%",  color: "bg-cyan-500" },
+                { label: "Lot size",              w: "10%", width: "30%",  color: "bg-emerald-500" },
+                { label: "Population growth",     w: "10%", width: "30%",  color: "bg-amber-500" },
+                { label: "Traffic (AADT)",        w: "8%",  width: "24%",  color: "bg-red-500" },
+                { label: "Sale recency",          w: "7%",  width: "21%",  color: "bg-purple-500" },
+              ].map((c) => (
+                <div class="flex items-center gap-3">
+                  <div class="flex-1 h-1 rounded-full bg-white/5 overflow-hidden">
+                    <div class={`h-full ${c.color} opacity-60 rounded-full transition-all`} style={`width: ${c.width}`} />
+                  </div>
+                  <span class="text-xs text-white/30 w-36 shrink-0">{c.label}</span>
+                  <span class="text-xs font-medium text-white/20 w-7 text-right shrink-0">{c.w}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Right: score card mockup -->
+          <div class="relative bg-[#0d0d0f] border-t md:border-t-0 md:border-l border-white/6 p-8 flex items-center justify-center">
+            <div class="w-full max-w-xs space-y-2.5">
+              <div class="rounded-xl border border-white/8 bg-white/3 p-4">
+                <div class="flex items-start justify-between mb-3">
+                  <div>
+                    <p class="text-[10px] text-white/30 mb-1 tracking-wide">Miami-Dade · T6-80</p>
+                    <p class="text-sm font-semibold text-white">1040 S Miami Ave</p>
+                  </div>
+                  <span class="rounded-full px-2.5 py-1 text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Tier A</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="flex-1 h-1.5 rounded-full bg-white/5 overflow-hidden">
+                    <div class="h-full w-[88.6%] rounded-full bg-gradient-to-r from-blue-500 to-violet-500"></div>
+                  </div>
+                  <span class="text-xl font-bold text-white tabular-nums">88.6</span>
+                </div>
+              </div>
+              {[
+                { k: "Waterfront", v: 87.4, c: "bg-blue-500" },
+                { k: "Zoning",     v: 100,  c: "bg-violet-500" },
+                { k: "Price",      v: 94.2, c: "bg-cyan-500" },
+                { k: "Lot size",   v: 78.0, c: "bg-emerald-500" },
+                { k: "Population", v: 82.1, c: "bg-amber-500" },
+                { k: "Traffic",    v: 91.3, c: "bg-red-400" },
+                { k: "Recency",    v: 65.0, c: "bg-purple-500" },
+              ].map((s) => (
+                <div class="flex items-center gap-3 px-1">
+                  <span class="text-xs text-white/30 w-20 shrink-0">{s.k}</span>
+                  <div class="flex-1 h-[3px] rounded-full bg-white/5 overflow-hidden">
+                    <div class={`h-full ${s.c} opacity-60 rounded-full`} style={`width: ${s.v}%`}></div>
+                  </div>
+                  <span class="text-xs text-white/50 tabular-nums w-8 text-right">{s.v}</span>
+                </div>
+              ))}
+            </div>
+            <div class="pointer-events-none absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-[#0d0d0f]"></div>
+            <div class="pointer-events-none absolute inset-x-0 top-0 h-8 bg-gradient-to-b from-[#0d0d0f]"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════
+         DEAL FEED — 2-col reversed
+    ══════════════════════════════════ -->
+    <section class="relative z-20 bg-[#0a0a0b] py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-8">
+        <div class="rounded-[16px] border border-white/6 bg-[#111113] overflow-hidden grid grid-cols-1 md:grid-cols-2">
+
+          <!-- Left: ranked list -->
+          <div class="relative bg-[#0d0d0f] p-8 flex items-center justify-center order-2 md:order-1 border-t md:border-t-0 md:border-r border-white/6">
+            <div class="w-full max-w-sm space-y-2">
+              <div class="flex items-center gap-2 mb-4">
+                {["All", "Tier A", "Miami-Dade", "Hillsborough"].map((f, i) => (
+                  <button class={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${i === 0 ? "bg-white text-[#0a0a0b]" : "border border-white/8 text-white/40 hover:text-white"}`}>{f}</button>
+                ))}
+              </div>
+              {[
+                { addr: "1040 S Miami Ave", zone: "T6-80", val: "$12.5M", score: 88.6, tier: "A" },
+                { addr: "601 NE 36th St",   zone: "T6-60", val: "$28.2M", score: 84.1, tier: "A" },
+                { addr: "1700 N Bayshore",  zone: "MXD",   val: "$41.0M", score: 79.3, tier: "A" },
+                { addr: "920 Brickell Ave", zone: "CBD",   val: "$19.8M", score: 71.2, tier: "A" },
+                { addr: "3400 NW 7th Ave",  zone: "BU-2",  val: "$11.1M", score: 52.0, tier: "B" },
+              ].map((d, i) => (
+                <div class={`group flex items-center gap-3 rounded-xl p-3 border transition-all cursor-pointer ${i === 0 ? "border-blue-500/30 bg-blue-500/5" : "border-white/5 hover:border-white/10 hover:bg-white/3"}`}>
+                  <span class="text-xs text-white/20 tabular-nums w-4 shrink-0">#{i+1}</span>
+                  <div class="flex-1 min-w-0">
+                    <p class="text-xs font-semibold text-white truncate">{d.addr}</p>
+                    <p class="text-xs text-white/30 mt-0.5">{d.zone} · {d.val}</p>
+                  </div>
+                  <div class="flex items-center gap-1.5 shrink-0">
+                    <span class="text-xs font-bold text-white tabular-nums">{d.score}</span>
+                    <span class={`rounded-full px-1.5 py-0.5 text-[10px] font-bold ${d.tier === "A" ? "bg-emerald-500/10 text-emerald-400" : "bg-amber-500/10 text-amber-400"}`}>{d.tier}</span>
+                  </div>
+                </div>
+              ))}
+              <div class="relative">
+                <div class="flex items-center gap-3 rounded-xl p-3 border border-white/5 blur-sm select-none pointer-events-none">
+                  <span class="text-xs text-white/20 w-4">#6</span>
+                  <div class="flex-1"><div class="h-3 bg-white/10 rounded w-2/3 mb-1.5"></div><div class="h-2 bg-white/5 rounded w-1/2"></div></div>
+                  <div class="h-3 bg-white/10 rounded w-10"></div>
+                </div>
+              </div>
+            </div>
+            <div class="pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-[#0d0d0f]"></div>
+          </div>
+
+          <!-- Right: text -->
+          <div class="p-10 lg:p-14 flex flex-col justify-center order-1 md:order-2">
+            <p class="text-[10px] font-medium uppercase tracking-widest text-blue-400 mb-3">Deal feed</p>
+            <h2 class="text-3xl font-bold tracking-tight text-white leading-[1.1] mb-4">
+              Ranked every night,<br />ready before 8am.
+            </h2>
+            <p class="text-sm text-white/40 leading-relaxed mb-8">
+              Filter by tier, county, or zoning. Full score breakdown, owner info,
+              comparable sales. Email alert the second a new Tier A appears.
+            </p>
+            <ul class="space-y-3">
+              {[
+                "Weighted 0–100 score with full breakdown",
+                "Filter by tier, county, zoning",
+                "Owner name + mailing address",
+                "Sale history and last sale price",
+                "One-click add to watchlist",
+              ].map((f) => (
+                <li class="flex items-center gap-3 text-sm text-white/50">
+                  <span class="flex h-4 w-4 items-center justify-center rounded-full bg-white/5 border border-white/8 shrink-0">
+                    <svg class="w-2.5 h-2.5 text-white/40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5 9-9"/></svg>
+                  </span>
+                  {f}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════
+         STATS STRIP
+    ══════════════════════════════════ -->
+    <div class="relative z-20 border-y border-white/6 bg-[#0f0f10]">
+      <div class="mx-auto max-w-7xl px-4 sm:px-8">
+        <div class="grid grid-cols-2 sm:grid-cols-4 divide-x divide-white/6">
+          {[
+            { v: "$2.8B",  l: "Prosper Group pipeline" },
+            { v: "247",    l: "Parcels scored" },
+            { v: "12",     l: "Tier A deals live" },
+            { v: "< 5min", l: "Alert to inbox" },
+          ].map((s) => (
+            <div class="px-6 py-8 text-center">
+              <div class="text-3xl font-bold tracking-tight text-white tabular-nums">{s.v}</div>
+              <div class="text-xs text-white/30 mt-1.5">{s.l}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ══════════════════════════════════
+         CTA
+    ══════════════════════════════════ -->
+    <section id="access" class="relative z-20 bg-[#0a0a0b] py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-8">
+        <div class="relative overflow-hidden rounded-[16px] border border-white/6 bg-[#111113] px-8 py-20 sm:px-16 text-center">
+          <div class="pointer-events-none absolute inset-0"
+               style="background: radial-gradient(ellipse 60% 60% at 50% 0%, rgba(59,130,246,0.07) 0%, transparent 70%);"
+               aria-hidden="true"></div>
+          <div class="relative">
+            <p class="text-[10px] font-medium uppercase tracking-widest text-blue-400 mb-4">Private beta</p>
+            <h2 class="text-3xl sm:text-[2.75rem] font-bold tracking-tight text-white mb-4 leading-[1.08]">
+              Get early access.
+            </h2>
+            <p class="text-sm text-white/40 max-w-md mx-auto mb-10 leading-relaxed">
+              Currently available for the Prosper Group team only.
+              Request your invite and we'll set you up within 24 hours.
+            </p>
+            <form class="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-sm mx-auto">
+              <input
+                type="email"
+                placeholder="you@prospergroup.com"
+                class="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white placeholder-white/25 focus:outline-none focus:border-blue-500/40 transition-colors"
+              />
+              <button
+                type="submit"
+                class="shrink-0 rounded-lg bg-white px-5 py-2.5 text-sm font-semibold text-[#0a0a0b] hover:bg-white/90 transition-colors">
+                Request invite
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════
+         FOOTER
+    ══════════════════════════════════ -->
+    <HoverFooter client:load />
+
+  </body>
 </html>
+
+
+<style>
+  body {
+    background-color: #0a0a0b;
+    color: #fff;
+  }
+
+  /* ── Stars ── */
+  .stars {
+    background-image:
+      radial-gradient(1px 1px at 8%  18%, rgba(255,255,255,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 22% 62%, rgba(255,255,255,0.45) 0%, transparent 100%),
+      radial-gradient(1px 1px at 38% 8%,  rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 53% 78%, rgba(255,255,255,0.35) 0%, transparent 100%),
+      radial-gradient(1px 1px at 68% 32%, rgba(255,255,255,0.65) 0%, transparent 100%),
+      radial-gradient(1px 1px at 82% 58%, rgba(255,255,255,0.45) 0%, transparent 100%),
+      radial-gradient(1px 1px at 14% 48%, rgba(255,255,255,0.55) 0%, transparent 100%),
+      radial-gradient(1px 1px at 91% 12%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 33% 88%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 59% 44%, rgba(255,255,255,0.55) 0%, transparent 100%),
+      radial-gradient(1px 1px at 77% 4%,  rgba(255,255,255,0.45) 0%, transparent 100%),
+      radial-gradient(1px 1px at 4%  82%, rgba(255,255,255,0.35) 0%, transparent 100%),
+      radial-gradient(1px 1px at 47% 27%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 86% 40%, rgba(255,255,255,0.45) 0%, transparent 100%),
+      radial-gradient(1px 1px at 19% 73%, rgba(255,255,255,0.4) 0%, transparent 100%);
+  }
+
+  /* ── Hero : 100vh exact, flex col, overflow hidden ── */
+  .hero-section {
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: #0a0a0b;
+  }
+
+  /* Zone texte : flex:1 = ~75vh */
+  .hero-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 1.5rem;
+    position: relative;
+    z-index: 10;
+    max-width: 48rem;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  /* ── Globe glow ── */
+  .globe-glow {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 400px;
+    background: radial-gradient(ellipse at 50% 100%,
+      rgba(30, 80, 200, 0.20) 0%,
+      rgba(59, 130, 246, 0.05) 55%,
+      transparent 75%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ── Globe : absolute, centre de la sphère au bas du hero ── */
+  .globe-zone {
+    position: absolute;
+    /* bottom: -(SIZE/2) → centre du canvas aligné avec le bas du hero */
+    bottom: -1220px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    line-height: 0;
+    width: 2100px;
+    height: 2100px;
+  }
+
+  /* Fade sur le bas */
+  .globe-fade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+      transparent 40%,
+      rgba(10,10,11,0.5) 75%,
+      #0a0a0b 100%);
+    pointer-events: none;
+    z-index: 3;
+  }
+</style>
