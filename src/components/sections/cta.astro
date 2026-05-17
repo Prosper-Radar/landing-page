@@ -1,0 +1,74 @@
+---
+---
+
+<section id="access" class="max-w-7xl mx-auto px-6 py-28">
+  <div class="relative rounded-3xl overflow-hidden">
+    <!-- Background -->
+    <div class="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-[#0f1117] to-violet-600/8" />
+    <div class="absolute inset-0 border border-white/8 rounded-3xl" />
+    <div class="absolute inset-0"
+      style="background-image: radial-gradient(circle at 70% 30%, rgba(59,130,246,0.08) 0%, transparent 50%);" />
+
+    <div class="relative z-10 px-8 py-16 sm:px-16 sm:py-20">
+      <div class="max-w-2xl">
+        <div class="inline-flex items-center gap-2 rounded-full bg-blue-500/10 border border-blue-500/20 px-3 py-1.5 text-xs text-blue-400 mb-8 tracking-wide">
+          Private beta — limited access
+        </div>
+
+        <h2 class="text-4xl sm:text-5xl font-serif font-normal text-white leading-tight mb-6">
+          Get access to
+          <br />
+          <span class="text-gradient-blue">DealScout</span>
+        </h2>
+
+        <p class="text-white/40 leading-relaxed mb-10 text-lg">
+          Built exclusively for the Prosper Group team. Request access and we'll
+          get you set up with Jay's credentials within 24 hours.
+        </p>
+
+        <!-- Simple request form -->
+        <form class="flex flex-col sm:flex-row gap-3 max-w-md">
+          <input
+            type="email"
+            placeholder="your@email.com"
+            class="flex-1 bg-white/5 border border-white/10 rounded-full px-5 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-blue-500/50 focus:bg-white/8 transition-all"
+          />
+          <button
+            type="submit"
+            class="shrink-0 bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-full text-sm font-medium transition-all shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 flex items-center gap-2"
+          >
+            Request access
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+            </svg>
+          </button>
+        </form>
+
+        <p class="text-xs text-white/20 mt-4">
+          Prosper Group internal tool · TechGuys Montreal
+        </p>
+      </div>
+
+      <!-- Right side: feature list -->
+      <div class="absolute right-16 top-1/2 -translate-y-1/2 hidden xl:flex flex-col gap-3">
+        {[
+          "Daily parcel sync from county APIs",
+          "7-criteria weighted scoring engine",
+          "Mapbox map with tier overlays",
+          "Email alerts for new Tier A deals",
+          "Watchlist & deal pipeline tracking",
+          "AI-powered deal narrative (v1)",
+        ].map((feature) => (
+          <div class="flex items-center gap-3">
+            <div class="w-5 h-5 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center shrink-0">
+              <svg class="w-2.5 h-2.5 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                <path d="m5 12 5 5 9-9"/>
+              </svg>
+            </div>
+            <span class="text-sm text-white/50">{feature}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
