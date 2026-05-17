@@ -1,0 +1,89 @@
+---
+const criteria = [
+  { key: "Waterfront proximity", weight: 30, score: 87, color: "#3b82f6", desc: "ST_Distance to nearest water body. 0m = 100, 1km+ = 0." },
+  { key: "Zoning class",         weight: 20, score: 100, color: "#8b5cf6", desc: "T6-80 → 100. MXD/CBD → 85-90. GU → 40. RU-1 → 10." },
+  { key: "Price range fit",      weight: 15, score: 94, color: "#06b6d4", desc: "Bell curve centred on $40M. Range: $10M–$100M." },
+  { key: "Lot size",             weight: 10, score: 78, color: "#22c55e", desc: "Minimum viable for luxury high-rise: 5,000+ sqft." },
+  { key: "Population growth",    weight: 10, score: 82, color: "#f59e0b", desc: "Census tract 3-year CAGR. 5%+ CAGR = perfect score." },
+  { key: "Traffic (AADT)",       weight: 8,  score: 91, color: "#ef4444", desc: "Annual Average Daily Traffic from FDOT. 100K+ = 100." },
+  { key: "Sale recency",         weight: 7,  score: 65, color: "#a78bfa", desc: "Last sale > 10 years ago = maximally negotiable." },
+];
+
+const exampleTotal = criteria.reduce((sum, c) => sum + (c.score * c.weight / 100), 0);
+---
+
+<section id="scoring" class="relative py-28 overflow-hidden">
+  <!-- Background glow -->
+  <div class="absolute inset-0 pointer-events-none"
+    style="background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(59,130,246,0.04) 0%, transparent 70%);" />
+
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+      <!-- Left: explanation -->
+      <div>
+        <div class="inline-flex items-center gap-2 rounded-full bg-white/5 border border-white/8 px-3 py-1.5 text-xs text-white/50 mb-6 tracking-wide uppercase">
+          The scoring engine
+        </div>
+        <h2 class="text-4xl sm:text-5xl font-serif font-normal text-white leading-tight mb-6">
+          Prosper Group's playbook,
+          <br />
+          <span class="text-white/40">turned into code</span>
+        </h2>
+        <p class="text-white/40 leading-relaxed mb-8">
+          Every acquisition criterion Jay Roberts uses to evaluate a deal — waterfront exposure,
+          zoning upside, price positioning, lot size, demographic tailwinds — is encoded as a
+          weighted formula. The result: a single 0–100 score that ranks parcels automatically.
+        </p>
+
+        <!-- Score example -->
+        <div class="glass rounded-2xl p-5">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-sm text-white/60">Example: 1040 S Miami Ave</span>
+            <div class="flex items-center gap-2">
+              <span class="text-2xl font-semibold text-white tabular-nums">{exampleTotal.toFixed(1)}</span>
+              <span class="tier-a text-xs rounded-full px-2 py-0.5 font-medium">Tier A</span>
+            </div>
+          </div>
+          <div class="w-full h-1.5 rounded-full bg-white/5 overflow-hidden">
+            <div class="h-full rounded-full bg-gradient-to-r from-blue-500 to-violet-500 transition-all"
+              style={`width: ${exampleTotal}%`} />
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: criteria breakdown -->
+      <div class="space-y-3">
+        {criteria.map((c) => (
+          <div class="glass rounded-xl px-5 py-4 group hover:border-white/12 transition-all">
+            <div class="flex items-center justify-between mb-2">
+              <div class="flex items-center gap-3">
+                <div class="w-2 h-2 rounded-full shrink-0" style={`background: ${c.color}`} />
+                <span class="text-sm text-white font-medium">{c.key}</span>
+              </div>
+              <div class="flex items-center gap-3 shrink-0">
+                <span class="text-xs text-white/30">{c.weight}%</span>
+                <span class="text-sm font-semibold text-white tabular-nums w-8 text-right">{c.score}</span>
+              </div>
+            </div>
+
+            <!-- Score bar -->
+            <div class="w-full h-1 rounded-full bg-white/5 overflow-hidden">
+              <div class="h-full rounded-full transition-all duration-1000"
+                style={`width: ${c.score}%; background: ${c.color}; opacity: 0.7`} />
+            </div>
+
+            <!-- Tooltip on hover -->
+            <p class="text-xs text-white/25 mt-2 leading-relaxed hidden group-hover:block">
+              {c.desc}
+            </p>
+          </div>
+        ))}
+
+        <p class="text-xs text-white/25 pt-2 text-center">
+          Hover any criterion to see the formula details
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
