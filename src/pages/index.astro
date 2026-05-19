@@ -28,7 +28,7 @@ import Globe from "../components/ui/Globe";
         </a>
 
         <nav class="hidden md:flex items-center gap-1">
-          {["How it works", "Scoring", "Markets", "Pricing"].map((l) => (
+          {["How it works", "Scoring", "Markets"].map((l) => (
             <a href={`#${l.toLowerCase().replace(/ /g, "-")}`}
                class="px-3 py-1.5 text-sm text-white/50 hover:text-white hover:bg-white/5 rounded-lg transition-colors">
               {l}
@@ -62,9 +62,10 @@ import Globe from "../components/ui/Globe";
       <!-- Zone texte — flex:1, centré verticalement -->
       <div class="hero-content">
 
+        <!-- TODO: remplacer par un fetch dynamique GET /api/v1/stats/public une fois l'endpoint créé -->
         <div class="animate-fade-up-1 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/4 px-3 py-1.5 text-xs text-white/50 mb-8">
           <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
-          Live · 247 parcels scored across South Florida
+          Live · Parcels scored daily across South Florida
         </div>
 
         <h1 class="animate-fade-up-2 text-[clamp(2.6rem,6.5vw,5rem)] font-bold leading-[1.04] tracking-[-0.03em] text-white mb-5">
