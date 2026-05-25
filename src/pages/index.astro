@@ -11,7 +11,9 @@ import Globe from "../components/ui/Globe";
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>DealScout — South Florida Land Intelligence</title>
     <meta name="description" content="Automated parcel scoring across Miami-Dade and Hillsborough. 7 criteria. Ranked daily. For Prosper Group only." />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" href="/noun.png" type="image/png" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
   </head>
 
   <body>
@@ -352,6 +354,57 @@ import Globe from "../components/ui/Globe";
         </div>
       </div>
     </div>
+
+
+    <!-- ══════════════════════════════════
+         FAQ
+    ══════════════════════════════════ -->
+    <section class="relative z-20 bg-[#0a0a0b] py-24">
+      <div class="mx-auto max-w-3xl px-4 sm:px-8">
+
+        <div class="mb-12 text-center">
+          <p class="text-[10px] font-medium uppercase tracking-widest text-blue-400 mb-3">FAQ</p>
+          <h2 class="text-3xl font-bold tracking-tight text-white leading-[1.1]">Common questions</h2>
+        </div>
+
+        <div class="divide-y divide-white/6">
+          {[
+            {
+              q: "What is a Tier A deal?",
+              a: "A Tier A deal is a parcel that scores 70 or above out of 100 on our scoring engine. It meets the Prosper Group acquisition criteria across all 7 criteria — waterfront proximity, zoning class, price fit, lot size, population growth, traffic, and sale recency."
+            },
+            {
+              q: "Where does the data come from?",
+              a: "We ingest daily exports from the Miami-Dade and Hillsborough County Property Appraiser APIs. Owner names, land values, zoning codes, lot sizes, and sale history are all pulled from official county records and normalized into a single PostGIS database."
+            },
+            {
+              q: "How is the score calculated?",
+              a: "Seven criteria are scored 0–100 individually, then combined using a weighted formula: Waterfront (30%), Zoning (20%), Price fit (15%), Lot size (10%), Population growth (10%), Traffic AADT (8%), and Sale recency (7%). The formula encodes the Prosper Group acquisition playbook."
+            },
+            {
+              q: "How fresh is the data?",
+              a: "Parcels are ingested and re-scored nightly. The dashboard shows the last cache timestamp so you always know when the data was refreshed. Email alerts fire within 5 minutes of a new Tier A appearing."
+            },
+            {
+              q: "What is Skip Trace?",
+              a: "Skip Trace searches Florida Sunbiz and public records to identify the entity and key contacts for a parcel's owner. When an Anthropic API key is configured, Claude ranks the officers by likelihood of being the acquisition decision-maker and surfaces the best contact first."
+            },
+            {
+              q: "Who has access?",
+              a: "DealScout is a private tool for the Prosper Group team only. Access is invite-only. Contact Jay or Raffaele to request an account."
+            },
+          ].map((item) => (
+            <details class="group py-5">
+              <summary class="flex cursor-pointer items-center justify-between gap-4 text-sm font-medium text-white/80 hover:text-white list-none transition-colors">
+                {item.q}
+                <svg class="w-4 h-4 shrink-0 text-white/30 transition-transform group-open:rotate-45" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+              </summary>
+              <p class="mt-3 text-sm text-white/40 leading-relaxed">{item.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
 
 
     <!-- ══════════════════════════════════
